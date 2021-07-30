@@ -16,7 +16,13 @@
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
   }
+  .catP{
+    font-weight: bold;
+  }
 
+  .mb-container{
+    margin: 5% auto ;
+  }
   table {
     display: block;
     overflow: auto;
@@ -324,7 +330,7 @@
     <div class="spacer"></div>
 </div>
 
-<div class="content" role="main">
+<div class="container mb-container" role="main">
 
   <!-- Tabs -->
   <nav>
@@ -340,35 +346,38 @@
       <div class="row">
         <div class="col-12">    
           <h1> Search </h1>
-          <input type="search" class="form-control" id="name" name="name" #name>
-          <button type="button" class="btn btn-lg btn-outline-primary" (click)="search(name.value)" > Search </button>
+          <input type="search" class="form-control" id="name" name="name" #name  required="required" pattern="[A-Za-z0-9]{1,20}">
+          <button type="button" [disabled]="!name" class="btn btn-lg btn-outline-primary" (click)="search(name.value)" > Search </button>
         </div>    
       </div>
 
   <!-- Search Results found -->
-  <div class="row">
+  <div class="row" *ngIf="Search?.length">
     <h3> Search Results</h3>
 
     <!-- People Results -->
     <div class="col-md-12">
+      <h4> People Results </h4>
       <table class="table table-bordered table-striped table-gray" >
         <thead>
-          <th scope="col">Name</th>
-          <th scope="col">Gender</th>
-          <th scope="col">Birth Year</th>
-          <th scope="col">Skin Color</th>
-          <th scope="col">Height</th>
-          <th scope="col">Homeworld</th>        
-          <th scope="col">Mass</th>
-          <th scope="col">Hair Color</th>
-          <th scope="col">Eye Color</th>
-          <th scope="col">Films</th>
-          <th scope="col">Species</th>
-          <th scope="col">Vehicles</th>
-          <th scope="col">Starships</th>  
-          <th scope="col">Created</th> 
-          <th scope="col">Edited</th>   
-          <th scope="col">Url</th>          
+          <tr>
+            <th scope="col">Name</th>
+            <th scope="col">Gender</th>
+            <th scope="col">Birth Year</th>
+            <th scope="col">Skin Color</th>
+            <th scope="col">Height</th>
+            <th scope="col">Homeworld</th>        
+            <th scope="col">Mass</th>
+            <th scope="col">Hair Color</th>
+            <th scope="col">Eye Color</th>
+            <th scope="col">Films</th>
+            <th scope="col">Species</th>
+            <th scope="col">Vehicles</th>
+            <th scope="col">Starships</th>  
+            <th scope="col">Created</th> 
+            <th scope="col">Edited</th>   
+            <th scope="col">Url</th>  
+          </tr>        
         </thead>
         <tbody *ngFor="let item of Search">
            <tr *ngFor="let x of item.people;  let i = index" [attr.data-index]="1">        
@@ -396,17 +405,13 @@
     <!-- Jokes Result -->
     <div class="col-md-12">
       <table class="table table-bordered" >
-        <thead><tr></tr></thead>
-        <tbody>
-          <tr *ngFor="let x of Search">
-            <td>
-              <ul *ngFor = "let item of x.jokes; let i = index" [attr.data-index]="i" >
-                  <li><span> Caterogies: {{item.categories}} |
-                    Id: {{item.id}} 
-                    | Url: {{item.url}} 
-                    | Value: {{item.value}} </span></li>
-              </ul>
-            </td>
+        <thead><h4> Joke Results </h4></thead>
+        <tbody  *ngFor="let x of Search">
+          <tr *ngFor = "let item of x.jokes; let i = index" [attr.data-index]="i">                       
+              <span> <p class="catP"> Caterogies: </p> {{item.categories}} </span><br />
+              <span> <p class="catP"> Id: </p> {{item.id}} </span><br />
+              <span> <p class="catP"> Url: </p> {{item.url}} </span><br />
+              <span> <p class="catP"> Value: </p> {{item.value}} </span><br />            
           </tr>
         </tbody>
       </table>
@@ -418,29 +423,28 @@
     <!-- Div Tab # Categories  -->
     <div class="tab-pane fade" id="nav-categories" role="tabpanel" aria-labelledby="nav-categories-tab">
       <div class="row">
-        <div class="col-6">
-          <tr><h3> Categories </h3></tr>
+        <tr><h3> Categories </h3></tr>
+        <div class="col-6">          
           <tr *ngFor="let item of Chuck">
             <td>
               <a class="category" id="category" name="category" #category (click)="getJokeCategory(category.text)" >
-                <button type="button" class="btn btn-lg btn-outline-primary" >{{item.category}}</button></a></td>
+                <button type="button" class="btn btn-lg btn-outline-primary" >{{item.category}}</button></a>
+            </td>
           </tr>
         </div>
-      </div>
-      <div class="row">
-        <div class="col-12">
+
+        <div class="col-6">
           <tr *ngFor="let item of Joke">
             <td>
-              <ul>
-                <li> Caterogies: {{item.categories}}</li>
-                <li> Id: {{item.id}}</li>
-                <li> Url: {{item.url}}</li>
-                <li> Value: {{item.value}}</li>
-              </ul>
+              <span> <p class="catP"> Caterogies: </p> {{item.categories}} </span><br />
+              <span> <p class="catP"> Id: </p> {{item.id}} </span><br />
+              <span> <p class="catP"> Url: </p> {{item.url}} </span><br />
+              <span> <p class="catP"> Value: </p> {{item.value}} </span><br />
             </td>
           </tr>
         </div>
       </div>
+      
     </div>
 
     <!-- Div Tab # People -->

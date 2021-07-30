@@ -2,6 +2,7 @@ import { Component, Inject, Injectable, NgIterable, OnInit} from '@angular/core'
 import { HttpClientModule} from '@angular/common/http';
 import { sovtechs as Sovtechs } from "./sovtechAPI";
 import { ApiService } from "./ApiService"
+
 @Component({
   selector: 'app-root',
   templateUrl: './app.component.html',
@@ -19,8 +20,7 @@ export class AppComponent {
 
    ngOnInit(){
      this.fetchPeople();
-     this.fetchChuck();
-     
+     this.fetchChuck();     
     }
 
    fetchPeople(){
@@ -35,27 +35,26 @@ export class AppComponent {
      })
    }
 
-   getJokeCategory(name: string){
-    if( window.confirm('Search the category' + name)){
+   getJokeCategory(name: string){    
       this.apiService.getChuckCategory(name).subscribe((res: {}) =>{
         this.Joke = [];
         this.Joke.push(res);
-      })
-    }
+      })    
    }
 
    search(name: string ){
-     if( window.confirm('Search the term' + name)){
-       this.apiService.getSearch(name).subscribe((res: {}) =>{
-         this.Search = [];
-         this.Search.push(res);
-       })
-     }
-    }
-      //return this.apiService.getSearch(name).subscribe((res: {}) =>{
-       // this.Search = res;
-     // })
    
-  // public sovtechChuck: Sovtechs.Chuck | undefined;
-  // constructor(public sovtechChucks: Sovtechs.IChuck) { }
+     if(name.length <= 0){
+       window.alert("Please enter a value in the search box");
+              
+     }
+     else{
+   
+      this.apiService.getSearch(name).subscribe((res: {}) =>{
+        this.Search = [];
+        this.Search.push(res);
+      })
+     }
+   }
+
 }
