@@ -1,7 +1,9 @@
 {
   "ExpandedNodes": [
-    ""
+    "",
+    "\\src",
+    "\\src\\app"
   ],
-  "SelectedNode": "\\C:\\Users\\User\\Source\\Repos\\MbonisiSPA",
+  "SelectedNode": "\\.git",
   "PreviewInSolutionExplorer": false
 }
