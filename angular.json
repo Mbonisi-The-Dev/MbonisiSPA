@@ -105,5 +105,8 @@
       }
     }
   },
-  "defaultProject": "MbonisiSPA"
+  "defaultProject": "MbonisiSPA",
+  "cli": {
+    "analytics": "39486517-5db5-4871-85ac-527ff9baad67"
+  }
 }
