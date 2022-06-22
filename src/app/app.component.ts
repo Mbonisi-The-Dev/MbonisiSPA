@@ -23,7 +23,9 @@ export class AppComponent {
      this.fetchChuck();     
     }
 
-   fetchPeople(){
+  fetchPeople() {
+
+
      return this.apiService.getPeople().subscribe((res: {}) =>{
        this.People = res;
      })
@@ -55,6 +57,8 @@ export class AppComponent {
         this.Search.push(res);
       })
      }
-   }
+  }
+
+
 
 }
